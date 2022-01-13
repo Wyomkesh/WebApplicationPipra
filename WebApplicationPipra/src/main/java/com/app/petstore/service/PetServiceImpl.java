@@ -22,7 +22,6 @@ public class PetServiceImpl implements PetService {
 		}
 	}
 
-	@Override
 	public Pet getPet(Integer id) {
 		Pet pet  = null;
 		if (id != null) {
@@ -36,6 +35,29 @@ public class PetServiceImpl implements PetService {
 			return pet;
 
 		}
+	}
+
+	public Pet updatePet(Integer id, Pet pet) {
+		Pet petByID = petRepo.getById(id);
+		petByID.setAddpet(pet.getAddpet());
+		petByID.setPetDesc(pet.getPetDesc());
+		petByID.setPetIn(pet.getPetIn());
+		petByID.setPetRequired(pet.getPetRequired());
+		Pet updatedPet = petRepo.save(petByID);
+		return updatedPet;
+	}
+
+	public String deletePet(Integer id) {
+         
+		String message = null;
+		if (id != null) {
+		petRepo.deleteById(id);
+		return "Pet deleted succesfully !!!";
+		}
+		else {
+			return  "Pet deleted succesfully !!!";
+			}
+	
 	}
 
 }
